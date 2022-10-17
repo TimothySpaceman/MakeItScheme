@@ -6,7 +6,7 @@
 		<link rel="stylesheet" href="main.css">
 		<link rel="icon" type="image/png" sizes="512x512" href="images/icon.png">
 	</head>
-	<body>
+	<body id="body">
         <div id="mainDiv" class="centred">
             <div id="headArea" class="centred">
                 <span id="pageTitle" class="centred">Make It Scheme!</span>
@@ -14,33 +14,24 @@
                     За це відповідальність несе сам користувач. Пам'ятаймо про академічну доброчесність та про твою здатність зробити те, на що даний ресурс не здатен!</span>
             </div>
             <div id="mainArea" class="centred">
-                <span id="lineNumbers"></span>
-                <textarea id="textEditor" spellcheck=”false” lang="ua">Коментар
-Початок
-Вводимо А і В
-                                        
-Умова А>В
-Так:
-                    
-Умова А!=В
-Так:
-Виконуємо А -= В
-...
-Ні:
-...
-                    
-...
-Ні:
-...
-                                        
-Виводимо А
-Кінець
-Капець     
-                              
-                </textarea>
+                <div id="panel">
+                    <img src="resources/settings-icon.png" id="settingsButton" class="panelIcon">
+                    <div id="generateButton" class="centred">
+                        <span class="centred">Згенерувати</span>
+                    </div>
+                    <img src="resources/export-icon.png" id="exportButton" class="panelIcon">
+                </div>
+                <div id="settingsMenu" class="menuHide">
+
+                </div>
+                <div id="mainAreaRow">
+                    <span id="lineNumbers"></span>
+                    <textarea id="textEditor" spellcheck=”false” lang="ua"></textarea>
+                </div>
             </div>
         </div>
         <script src="index.js"></script>
+        <script src="themeExecutor.js"></script>
         <script src="tabsupport.js"></script>
 	</body>
 </html>
