@@ -15,6 +15,11 @@ const classes = {
     settingsspan: document.getElementsByClassName("settingsSpan"),
 }
 
+const images = {
+    settingsbutton: document.getElementById("settingsButton"),
+    exportbutton: document.getElementById("exportButton"),
+}
+
 const blueBerry = {
     main_background: "#0F0F19",
     editor_background: "#10101C",
@@ -107,8 +112,7 @@ function executeTheme(){
             }
         }
     }
+    for(const [key, value] of Object.entries(images)){
+        value.setAttribute("src", "resources/" + key + "-" + localStorage.getItem("settings_theme") + ".png")
+    }
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-    executeTheme()
-})

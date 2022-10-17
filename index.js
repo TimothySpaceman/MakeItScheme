@@ -77,7 +77,7 @@ let isCtrlPressed = 0
 class Settings {
     constructor() {
         this.data = defaults
-        this.load()
+        this.isLoaded = 0
 
         this.button = document.getElementById("settingsButton")
         this.menu = document.getElementById("settingsMenu")
@@ -87,6 +87,9 @@ class Settings {
         }
 
         this.button.setAttribute("onclick", `settings.toggleMenu()`)
+        
+        this.load()
+        this.controls.themeList.value = this.data.theme
     }
 
     update(){
@@ -114,13 +117,19 @@ class Settings {
 
     load(){
         for(const [key, value] of Object.entries(this.data)){
+            console.log(key)
             if(localStorage.getItem(`settings_${key}`)){
                 this.data[key] = localStorage.getItem(`settings_${key}`)
+                console.log("ITS OK")
             } else {
                 this.reset()
                 break
             }
-        } 
+        }
+        if(this.loaded == 0){
+            this.loaded = 1
+        } else {
+        }
     }
 
     toggleMenu(){
@@ -137,6 +146,18 @@ class Tree {
         this.snapshot = []
         this.snapshotIndex = -1
         this.lines = []
+
+        this.error = "Initialized"
+
+        this.generateButton = document.getElementById("generateButton")
+
+        this.generateButton.onclick = () => {
+            tree.grow()
+            if(this.error == "Clear"){
+                tree.clearChild()
+                tree.processChild()   
+            }
+        }
     }
 
     grow() {
@@ -160,6 +181,13 @@ class Tree {
                 }
             }
         })
+
+        this.checkErrors()
+        if(this.error == "Clear"){
+            console.log("Tree Is Gorwn Successfully")
+        } else {
+            console.log("Error: " + this.error)
+        }      
     }
 
     initStats() {
@@ -194,6 +222,28 @@ class Tree {
         }
 
         this.grow()
+    }
+
+    checkErrors(){
+        if(this.stats.start == 0){
+            return this.error = "Start element not found"
+        } else if(this.stats.finish == 0){
+            return this.error = "Finish element not found"
+        } else if(this.stats.condition > this.stats.yes){
+            return this.error = "Yes element not found"
+        } else if(this.stats.condition < this.stats.yes){
+            return this.error = "Extra Yes element"
+        } else if(this.stats.condition > this.stats.no){
+            return this.error = "No element not found"
+        } else if(this.stats.condition < this.stats.no){
+            return this.error = "Extra No element"
+        } else if(this.stats.yes + this.stats.no > this.stats.end){
+            return this.error = "Not enough ... elements"
+        } else if(this.stats.yes + this.stats.no < this.stats.end){
+            return this.error = "Extra ... element"
+        } else {
+            return this.error = "Clear"
+        }
     }
 
     clearChild() {
@@ -252,7 +302,7 @@ class Tree {
     clearService() {
         for (let i = 0; i < this.elements.length - 1; i += 1) {
             for (let childInd = 0; childInd < this.elements[i].child.length; childInd += 1) {
-                if (["yes", "no", "end"].includes(tree.elements[tree.elements[i].child[childInd]].type)) {
+                if (["yes", "no", "end"].includes(this.elements[this.elements[i].child[childInd]].type)) {
                 //if(tree.elements[tree.elements[i].child[childInd]].type == types["Так:"] || tree.elements[tree.elements[i].child[childInd]].type == types["Ні:"] || tree.elements[tree.elements[i].child[childInd]].type == types["..."]){
                 //    console.log("ID: " + this.elements[i].id + " Child " + childInd)
                     this.elements[i].child[childInd] = this.elements[this.elements[i].child[childInd]].child[0]
@@ -296,6 +346,7 @@ class Line {
         }
     }
 }
+
 
 
 let tree = new Tree()
@@ -367,6 +418,7 @@ tree.grow()
 tree.clearChild()
 tree.processChild()
 
+setTimeout(setting.update(), 1000)
 
 function goo() {
     tree.grow()
