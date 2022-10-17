@@ -58,6 +58,16 @@ body {
     margin-bottom: auto;
 }
 
+/* .lefted{
+    margin-left: 0px;
+    margin-right: auto;
+}
+
+.righted{
+    margin-left: auto;
+    margin-right: 0px;
+} */
+
 .panelIcon{
     cursor: pointer;
 
@@ -98,11 +108,12 @@ body {
 .settingsField{
     height: 25px;
 
+    width: 700px;
+
     font-size: 20px;
     font-family: Consolas;
 
-    margin-left: 15px;
-
+    display: block;
     display: flex;
     flex-direction: row;
 }
@@ -197,9 +208,11 @@ body {
 }
 
 #themeList{  
+    cursor: pointer;
     font-size: 20px;
     font-family: Consolas;
-    margin-left: 15px;
+    margin-left: auto;
+    margin-right: 15px;
     margin-top: -1px;
     display: block;
     line-height: 1.3;
@@ -209,6 +222,16 @@ body {
     -moz-appearance: none;
     -webkit-appearance: none;
     appearance: none;
+}
+
+#clownModeChBx{
+    cursor: pointer;
+    font-size: 20px;
+    font-family: Consolas;
+    margin-left: auto;
+    margin-right: 15px;
+    margin-top: -1px;
+    display: block;
 }
 
 #pageTitle{

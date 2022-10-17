@@ -418,8 +418,6 @@ tree.grow()
 tree.clearChild()
 tree.processChild()
 
-setTimeout(setting.update(), 1000)
-
 function goo() {
     tree.grow()
     tree.clearChild()

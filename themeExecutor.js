@@ -7,11 +7,13 @@ const elements = {
     generatebutton: document.getElementById("generateButton"),
     settinsmenu: document.getElementById("settingsMenu"),
     themelist: document.getElementById("themeList"),
+    clownmodechbx: document.getElementById("clownModeChBx"),
     linenumbers: document.getElementById("lineNumbers"),
     editor: document.getElementById("textEditor")
 }
 
 const classes = {
+    settingsfield: document.getElementsByClassName("settingsField"),
     settingsspan: document.getElementsByClassName("settingsSpan"),
 }
 
@@ -20,68 +22,94 @@ const images = {
     exportbutton: document.getElementById("exportButton"),
 }
 
+const themeTemplate = {
+    main_background: 1,
+    editor_background: 2,
+    panel_background: 3,
+    settinsmenu_background: 4,
+    settinsfield_background: 5,
+    themelist_background: 6,
+    mainarea_background: 7,
+    title_accent: 8,
+    manuscript_accent: 9,
+    generatebutton_accent: 10,
+    settingsspan_accent: 11,
+    themelist_accent: 12,
+    clownmodechbx_accent: 13,
+    linenumbers_accent: 14,
+    editor_accent: 15
+}
+
 const blueBerry = {
-    main_background: "#0F0F19",
-    editor_background: "#10101C",
-    panel_background: "#10101C",
-    settinsmenu_background: "#10101C",
-    themelist_background: "#10101C",
-    mainarea_background: "#10101C",
-    title_accent: "#CCCCFF",
-    manuscript_accent: "#CCCCFF",
-    generatebutton_accent: "#A0A0E5",
-    settingsspan_accent: "#9191F2",
-    themelist_accent: "#E5E5FF",
-    linenumbers_accent: "#9191F2",
-    editor_accent: "#E5E5FF"
+    1: "#0F0F19",
+    2: "#10101C",
+    3: "#10101C",
+    4: "#10101C",
+    5: "#10101C",
+    6: "#10101C",
+    7: "#10101C",
+    8: "#CCCCFF",
+    9: "#CCCCFF",
+    10: "#A0A0E5",
+    11: "#9191F2",
+    12: "#E5E5FF",
+    13: "#E5E5FF",
+    14: "#9191F2",
+    15: "#E5E5FF"
 }
 
 const justBlack = {
-    main_background: "#000000",
-    editor_background: "#000000",
-    panel_background: "#000000",
-    settinsmenu_background: "#000000",
-    themelist_background: "#000000",
-    mainarea_background: "#000000",
-    title_accent: "#E5E5E5",
-    manuscript_accent: "#E5E5E5",
-    generatebutton_accent: "#E5E5E5",    
-    settingsspan_accent: "#B2B2B2",
-    themelist_accent: "#E5E5E5",    
-    linenumbers_accent: "#B2B2B2",
-    editor_accent: "#E5E5E5"
+    1: "#000000",
+    2: "#000000",
+    3: "#000000",
+    4: "#000000",
+    5: "#000000",
+    6: "#000000",
+    7: "#000000",
+    8: "#E5E5E5",
+    9: "#E5E5E5",
+    10: "#E5E5E5",    
+    11: "#B2B2B2",
+    12: "#E5E5E5",    
+    13: "#E5E5E5",  
+    14: "#B2B2B2",
+    15: "#E5E5E5"
 }
 
 const justWhite = {
-    main_background: "#E5E5E5",
-    editor_background: "#E5E5E5",
-    panel_background: "#E5E5E5",
-    settinsmenu_background: "#E5E5E5",
-    themelist_background: "#E5E5E5",
-    mainarea_background: "#E5E5E5",
-    title_accent: "#0C0C0C",
-    manuscript_accent: "#0C0C0C",
-    generatebutton_accent: "#0C0C0C",  
-    settingsspan_accent: "#262626",
-    themelist_accent: "#0C0C0C",
-    linenumbers_accent: "#262626",
-    editor_accent: "#0C0C0C"
+    1: "#E5E5E5",
+    2: "#E5E5E5",
+    3: "#E5E5E5",
+    4: "#E5E5E5",
+    5: "#E5E5E5",
+    6: "#E5E5E5",
+    7: "#E5E5E5",
+    8: "#0C0C0C",
+    9: "#0C0C0C",
+    10: "#0C0C0C",  
+    11: "#262626",
+    12: "#0C0C0C",
+    13: "#0C0C0C",
+    14: "#262626",
+    15: "#0C0C0C"
 }
 
 const greenOcean = {
-    main_background: "#002D33",
-    editor_background: "#003840",
-    panel_background: "#003840",
-    settinsmenu_background: "#003840",
-    themelist_background: "#003840",
-    mainarea_background: "#003840",
-    title_accent: "#ADD8CB",
-    manuscript_accent: "#ADD8CB",
-    generatebutton_accent: "#ADD8CB",    
-    settingsspan_accent: "#008C72",
-    themelist_accent: "#ADD8CB",
-    linenumbers_accent: "#008C72",
-    editor_accent: "#ADD8CB"
+    1: "#002D33",
+    2: "#003840",
+    3: "#003840",
+    4: "#003840",
+    5: "#003840",
+    6: "#003840",
+    7: "#003840",
+    8: "#ADD8CB",
+    9: "#ADD8CB",
+    10: "#ADD8CB",    
+    11: "#008C72",
+    12: "#ADD8CB",
+    13: "#ADD8CB",
+    14: "#008C72",
+    15: "#ADD8CB"
 }
 
 const themes = {
@@ -93,7 +121,12 @@ const themes = {
 
 function executeTheme(){
     let theme = themes[localStorage.getItem("settings_theme")]
-    
+    for(const [key, value] of Object.entries(theme)){
+        theme.key = themeTemplate[value]
+    }
+
+    console.log(theme)
+
     for(const [key, value] of Object.entries(elements)){
         if(theme[`${key}_background`]){
             value.style.backgroundColor = theme[`${key}_background`]
