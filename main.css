@@ -53,6 +53,11 @@ body {
     margin-right: auto;
 }
 
+.vcentred{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
 .panelIcon{
     cursor: pointer;
 
@@ -66,6 +71,45 @@ body {
 .panelIcon:hover{
     opacity: 0.7;
     transition-duration: 0.2s;
+}
+
+.menuHide{
+    height: 0px;
+    transition-duration: 0.5s;
+}
+
+.menuHide > *{
+    opacity: 0;
+    margin-top: -25px;
+    transition-duration: 0.3s;
+}   
+
+.settingsMenuShow{
+    height: 50px;
+    transition-duration: 0.5s;
+}
+
+.settingsMenuShow > .settingsField{
+    opacity: 1;
+    margin-top: 12.5px;
+    transition-duration: 0.3s;
+}
+
+.settingsField{
+    height: 25px;
+
+    font-size: 20px;
+    font-family: Consolas;
+
+    margin-left: 15px;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.settingsSpan{
+    font-size: 20px;
+    font-family: Consolas;
 }
 
 #mainDiv{
@@ -92,12 +136,18 @@ body {
     flex-direction: row;
 }
 
+#panel-and-menu{
+    z-index: 17;
+    box-shadow: 0px 8px 10px 0px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+}
+
 #panel{
     width: 75vw;
     height: 40px;
     max-height: 40px;
-    box-shadow: 0px 8px 10px 0px rgba(0,0,0,0.1);
-    z-index: 15;
+    z-index: 16;
 
     display: flex;
     flex-direction: row;
@@ -118,7 +168,6 @@ body {
     height: 100%;
     width: 200px;
 
-
     display: flex;
     flex-direction: row;
 
@@ -132,11 +181,31 @@ body {
 }
 
 #generateButton > span{
-    font-size: 30px;
+    font-size: 25px;
     font-family: Consolas;
 }
 
+#settinsMenu{
+    z-index: 15;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+}
 
+#themeList{  
+    font-size: 20px;
+    font-family: Consolas;
+    margin-left: 15px;
+    margin-top: -1px;
+    display: block;
+    line-height: 1.3;
+    max-width: 150px; 
+    box-sizing: border-box;
+    border: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
 
 #pageTitle{
     margin-top: 1.5vw;

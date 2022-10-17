@@ -78,6 +78,27 @@ class Settings {
     constructor() {
         this.data = defaults
         this.load()
+
+        this.button = document.getElementById("settingsButton")
+        this.menu = document.getElementById("settingsMenu")
+
+        this.controls = {
+            themeList: document.getElementById("themeList")
+        }
+
+        this.button.setAttribute("onclick", `settings.toggleMenu()`)
+    }
+
+    update(){
+        if(this.data.theme != this.controls.themeList.value){
+            this.set("theme", this.controls.themeList.value)
+        }
+        this.save()
+        executeTheme()
+    }
+
+    set(parameter, value){
+        this.data[parameter] = value
     }
 
     reset(){
@@ -100,6 +121,14 @@ class Settings {
                 break
             }
         } 
+    }
+
+    toggleMenu(){
+        if(this.menu.getAttribute("class") == "menuHide"){
+            this.menu.setAttribute("class", "settingsMenuShow")
+        } else {
+            this.menu.setAttribute("class", "menuHide")
+        }
     }
 }
 
@@ -269,6 +298,8 @@ class Line {
 }
 
 
+let tree = new Tree()
+let settings = new Settings("settingsButton", "settingsMenu")
 
 
 function updateEditor() {
@@ -285,7 +316,10 @@ function updateEditor() {
 }
 
 ["keyup", "keydown", "mousemove"].forEach((el) => {
-    window.addEventListener(el, updateEditor)
+    window.addEventListener(el, () => {
+        updateEditor()
+        settings.update()
+    })
 })
 
 window.addEventListener("keydown", (event) => {
@@ -323,11 +357,6 @@ function mainLoop() {
     requestAnimationFrame(mainLoop)
 }
 
-//mainLoop()
-
-let tree = new Tree()
-let settins = new Settings()
-
 if (localStorage.getItem("editor_text")) {
     textEditor.value = localStorage.getItem("editor_text")
 } else {
@@ -338,10 +367,6 @@ tree.grow()
 tree.clearChild()
 tree.processChild()
 
-
-function testWhrite(){
-    localStorage.setItem('testItem', 35);
-}
 
 function goo() {
     tree.grow()

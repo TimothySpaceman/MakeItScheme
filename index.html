@@ -14,15 +14,24 @@
                     За це відповідальність несе сам користувач. Пам'ятаймо про академічну доброчесність та про твою здатність зробити те, на що даний ресурс не здатен!</span>
             </div>
             <div id="mainArea" class="centred">
-                <div id="panel">
-                    <img src="resources/settings-icon.png" id="settingsButton" class="panelIcon">
-                    <div id="generateButton" class="centred">
-                        <span class="centred">Згенерувати</span>
+                <div id="panel-and-menu">
+                    <div id="panel">
+                        <img src="resources/settings-icon.png" id="settingsButton" class="panelIcon">
+                        <div id="generateButton" class="centred">
+                            <span class="centred vcentred">Згенерувати</span>
+                        </div>
+                        <img src="resources/export-icon.png" id="exportButton" class="panelIcon">
                     </div>
-                    <img src="resources/export-icon.png" id="exportButton" class="panelIcon">
-                </div>
-                <div id="settingsMenu" class="menuHide">
-
+                    <div id="settingsMenu" class="menuHide">
+                        <div class="settingsField vcentred"><span class="settingsSpan">Тема Оформлення </span>
+                            <select id="themeList">
+                                <option value="blueberry">BlueBerry</option>
+                                <option value="greenocean">Green Ocean</option>
+                                <option value="justblack">Just Black</option>
+                                <option value="justwhite">Just White</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div id="mainAreaRow">
                     <span id="lineNumbers"></span>
